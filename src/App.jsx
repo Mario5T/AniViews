@@ -1,10 +1,11 @@
 import { 
   Route,
   createRoutesFromElements,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   Outlet
 } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AnimeList from './components/AnimeList';
@@ -77,7 +78,7 @@ const HomePage = () => {
   );
 };
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route index element={<HomePage />} />
@@ -89,17 +90,8 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
     </Route>
-  ),
-  {
-    future: {
-      v7_startTransition: true,
-      v7_relativeSplatPath: true
-    }
-  }
+  )
 );
-
-// Add to imports
-import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
